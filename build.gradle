@@ -6,7 +6,6 @@ plugins {
 
 group = 'az.example'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
 
 configurations {
 	compileOnly {
@@ -25,8 +24,16 @@ dependencies {
 	runtimeOnly 'org.postgresql:postgresql'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.13.4'
+	implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-xml', version: "2.14.0"
+	implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: "$jacksondataformatVersion"
+	implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
+	implementation group: 'org.apache.commons', name: 'commons-text', version: '1.9'
+
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
 }
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11

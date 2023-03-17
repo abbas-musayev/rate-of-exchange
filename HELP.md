@@ -1,4 +1,7 @@
 # Getting Started
+Yaradilmali APi ler
+1. GET body - date return exchange if not exists in database then call feign client servise and save else return from database
+2. DELETE body - date deleted from exchange from database
 
 ### Reference Documentation
 For further reference, please consider the following sections:
