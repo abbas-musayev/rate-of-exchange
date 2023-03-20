@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 import java.util.List;
+import java.util.Set;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -26,5 +27,5 @@ public class ValuteCurs {
     String description;
     @JacksonXmlProperty(localName = "ValType")
     @JacksonXmlElementWrapper(useWrapping = false)
-    private List<ValuteType> valuteType;
+    private Set<ValuteType> valuteType;
 }

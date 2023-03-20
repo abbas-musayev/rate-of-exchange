@@ -6,6 +6,7 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="D:/Program Files/Gradle/gradle-7.5.1/bin/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.26/8f8cf0372abf564913e9796623aac4c8ea44025a/lombok-1.18.26.jar" />
+          <entry name="D:/Program Files/Gradle/gradle-7.5.1/bin/caches/modules-2/files-2.1/org.mapstruct/mapstruct-processor/1.5.3.Final/dce418bedafd71ff8dd2cef15006c0fee788b073/mapstruct-processor-1.5.3.Final.jar" />
         </processorPath>
         <module name="rateofexchange.main" />
       </profile>

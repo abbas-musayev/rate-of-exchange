@@ -7,12 +7,16 @@ import lombok.experimental.FieldDefaults;
 
 import java.math.BigDecimal;
 
-@Data
-@FieldDefaults(level = AccessLevel.PRIVATE)
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Valute {
+
+    @JacksonXmlProperty(isAttribute = true, localName = "Code")
+    String code;
     @JacksonXmlProperty(isAttribute = true, localName = "Nominal")
     private String nominal;
     @JacksonXmlProperty(isAttribute = true, localName = "Name")

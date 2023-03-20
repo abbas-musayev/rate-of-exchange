@@ -1,22 +1,33 @@
 package az.example.rateofexchange.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.Instant;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Entity
 @Table(name = "valute")
-public class ValuteEnt {
+@SQLDelete(sql = "update valute set is_deleted = true , is_active = false where id = ?")
+@Where(clause = "is_deleted = false")
+public class ValuteEnt{
 
     @Id
-    public Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "code")
+    private String code;
 
     @Column(name = "nominal")
     private String nominal;
@@ -27,4 +38,25 @@ public class ValuteEnt {
     @Column(name = "value")
     private BigDecimal value;
 
+    @Column(name = "is_deleted")
+    private Boolean isDeleted = Boolean.FALSE;
+    @Column(name = "is_active")
+    private Boolean isActive = Boolean.FALSE;
+
+    @CreatedDate
+    @Column(name = "created_date", updatable = false)
+    @JsonIgnore
+    private Instant createdDate = Instant.now();
+
+    @LastModifiedDate
+    @Column(name = "last_modified_date")
+    @JsonIgnore
+    private Instant lastModifiedDate = Instant.now();
+
+
+    @PrePersist
+    public void prePersist(){
+        setIsActive(true);
+        setIsDeleted(false);
+    }
 }

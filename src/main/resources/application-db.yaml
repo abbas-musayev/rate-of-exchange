@@ -4,10 +4,11 @@ spring:
     username: &username ${DB_CONNECTION_USERNAME:postgres}
     password: &password ${DB_CONNECTION_PASSWORD:postgres}
   jpa:
-    show-sql: false
-    generate-ddl: false
+    show-sql: true
+    generate-ddl: true
     open-in-view: false
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
   liquibase:
-    enabled: ${LIQUBASE_ENABLED:false}
+    enabled: ${LIQUIBASE_ENABLED:false}
+    change-log: ${LIQUIBASE_CLASSPATH:classpath:db/changelog/db.changelog-${ACTIVE_PROFILE:master}.yaml}

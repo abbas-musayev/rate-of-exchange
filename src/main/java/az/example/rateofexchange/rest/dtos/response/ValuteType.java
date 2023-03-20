@@ -7,6 +7,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.util.List;
+import java.util.Set;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -15,7 +16,9 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ValuteType {
 
+    @JacksonXmlProperty(isAttribute = true, localName = "Type")
+    String type;
     @JacksonXmlProperty(localName = "Valute")
     @JacksonXmlElementWrapper(useWrapping = false)
-    private List<Valute> valute;
+    private Set<Valute> valute;
 }

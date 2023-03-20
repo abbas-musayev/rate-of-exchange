@@ -1,0 +1,72 @@
+Bu proyekti yazdigim zaman qarisma cixan bilmediyim problemlerin ve yeni oyrendiyim heller haqqinda yazacam
+
+1. Bu xətanın səbəbi, standart olaraq JPA-nın LocalDate tipini birbaşa verilənlər bazasında saxlaya bilməməsidir. LocalDate növü PostgreSql-də DATE növü kimi saxlanılır
+2. MapStruct "Consider defining a bean of type 'az.example.rateofexchange.mapper.ValuteCursMapper' in your configuration" xetasi verirdi.
+build.gradle file-na annotationProcessor "org.mapstruct:mapstruct-processor:1.5.3.Final" əlavə etdim
+
+3. Mapstruct vasitesi ile ic ice olan
+Mən Mapstruct istifadə edirəm. Və A sinifi içərisində Set<B> sinifi və onunda içərisində Set<C> sinifi olan bir Sinifim
+var mən bu sinifi Mapstruct istifadə edərək map etdiyimdə C sinifi üçün kodları generate etmir.
+
+Helli
+ @Mapping(target = "setB", qualifiedByName = "mapSetB")
+    ADto aToADto(A a);
+
+    @Named("mapSetC")
+    default Set<CDto> mapSetC(Set<C> set) {
+        return set.stream()
+                  .map(c -> mapCtoCDto(c))
+                  .collect(Collectors.toSet());
+    }
+
+    @Named("mapSetB")
+    default Set<BDto> mapSetB(Set<B> set) {
+        return set.stream()
+                  .map(b -> {
+                      BDto bDto = mapBtoBDto(b);
+                      bDto.setSetC(mapSetC(b.getSetC()));
+                      return bDto;
+                  })
+                  .collect(Collectors.toSet());
+    }
+
+    BDto mapBtoBDto(B b);
+    CDto mapCtoCDto(C c);
+}
+
+3. Hefte sonu tarixi secildikde bazada ilk once bu tarix yoxlanilir.
+    Ve bu tarixe uygun mmelujmat tapilmasa feign clinet cagilir, meulmat ayin 17 sine gelir
+        bazaya yazilir.
+    Yeniden ayin 19 zu (hefte sonu) request atildiqda bazada tapilmir gedir yene feign clientdan melumat cekilir
+        ve bazaya 17 si olaraq yazilir
+    Bu zamanda bazada ayin 17 sine uygun iki eded data olur
+    Yoxlamaq olarki eger gelen tarix hefte sonudursa onda onda bu heftenin 5 ci gune olan taxiri tapilsin ve bazada bu cure yoxlanilsin
+    Eger tapilmasa onda feign cliente cagirilsin
+
+
+1. API 1 -> azn , tarix , secilmis valyuta cavab
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
