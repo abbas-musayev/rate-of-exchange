@@ -16,7 +16,7 @@ services:
     image: currency-image
     environment:
       DB_CONNECTION_USERNAME: postgres
-      DB_CONNECTION_PASSWORD: postgre
+      DB_CONNECTION_PASSWORD: postgres
       DB_NAME: currency
     ports:
       - '8090:8090'
