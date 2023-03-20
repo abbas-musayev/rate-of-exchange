@@ -21,36 +21,40 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
 	compileOnly 'org.projectlombok:lombok'
-	runtimeOnly 'org.postgresql:postgresql'
+
+	runtimeOnly group: 'org.postgresql', name: 'postgresql'
+
 	annotationProcessor 'org.projectlombok:lombok'
+
 	implementation group: 'org.mapstruct', name: 'mapstruct', version: '1.5.3.Final'
 	implementation group: 'org.mapstruct', name: 'mapstruct-processor', version: '1.4.2.Final'
 	annotationProcessor "org.mapstruct:mapstruct-processor:1.5.3.Final"
+
 	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.13.4'
 	implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-xml', version: "2.14.0"
+
 	implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: "$jacksondataformatVersion"
+
 	implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
+
 	implementation group: 'org.apache.commons', name: 'commons-text', version: '1.9'
 
 //	implementation group: 'org.springframework.security', name: 'spring-security-core', version: '6.0.1'
 //	implementation group: 'org.springframework.security', name: 'spring-security-web', version: '6.0.2'
-	compileOnly 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 
 	implementation "io.jsonwebtoken:jjwt-api:${jjwtVersion}"
 	implementation "io.jsonwebtoken:jjwt-impl:${jjwtVersion}"
 	implementation "io.jsonwebtoken:jjwt-jackson:${jjwtVersion}"
 
-
-	implementation group: 'org.modelmapper', name: 'modelmapper', version: '3.1.1'
-
 	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
-	implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '3.0.0'
+	implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
 
 	implementation ('org.liquibase:liquibase-core:4.11.0'){
 		exclude group: 'ch.qos.lockback'
 	}
-
 }
 
 tasks.named('test') {

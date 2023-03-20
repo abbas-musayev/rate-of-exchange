@@ -2,7 +2,8 @@ spring:
   profiles:
     include:
       - server
-      - db
+#      - db
       - lang
+      - main
 #      - security
 
