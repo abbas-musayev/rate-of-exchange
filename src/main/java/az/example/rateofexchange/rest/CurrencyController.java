@@ -1,5 +1,6 @@
 package az.example.rateofexchange.rest;
 
+import az.example.rateofexchange.enums.ValuteEnum;
 import az.example.rateofexchange.rest.dtos.request.ExchangeRequestDTO;
 import az.example.rateofexchange.rest.dtos.response.ExchangeDTO;
 import az.example.rateofexchange.rest.dtos.response.Valute;
@@ -35,13 +36,18 @@ public class CurrencyController {
     }
 
     @GetMapping("/by-date-and-valute")
-    public ResponseEntity<Valute> getCurrencyByDateAndValute(@RequestParam String date, @RequestParam String valute){
+    public ResponseEntity<Valute> getCurrencyByDateAndValute(@RequestParam String date, @RequestParam ValuteEnum valute){
         return ResponseEntity.ok(exchangeService.getCurrencyByDateAndValute(date,valute));
     }
 
     @GetMapping("/by-date")
     public ResponseEntity<Set<ValuteType>> getCurrencyByDate(@RequestParam String date){
         return ResponseEntity.ok(exchangeService.getCurrencyByDate(date));
+    }
+
+    @GetMapping("/by-valute")
+    public ResponseEntity<Set<ValuteType>> getCurrencyByValute(@RequestParam ValuteEnum valute){
+        return ResponseEntity.ok(exchangeService.getCurrencyByValute(valute));
     }
 }
 

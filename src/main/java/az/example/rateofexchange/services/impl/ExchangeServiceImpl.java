@@ -3,6 +3,7 @@ package az.example.rateofexchange.services.impl;
 import az.example.rateofexchange.domain.ValuteCursEnt;
 import az.example.rateofexchange.domain.ValuteEnt;
 import az.example.rateofexchange.domain.ValuteTypeEnt;
+import az.example.rateofexchange.enums.ValuteEnum;
 import az.example.rateofexchange.exception.NotFoundCustomException;
 import az.example.rateofexchange.mapper.ValuteTypeMapper;
 import az.example.rateofexchange.repository.ValuteRepo;
@@ -66,13 +67,13 @@ public class ExchangeServiceImpl implements ExchangeService {
     }
 
     @Override
-    public Valute getCurrencyByDateAndValute(String date, String code) {
+    public Valute getCurrencyByDateAndValute(String date, ValuteEnum code) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         LocalDate date1 = LocalDate.parse(date, formatter);
 
         LocalDate localDate = checkWeekendDate(date1);
         Valute response = new Valute();
-        ValuteEnt byDateAndValute = valuteRepo.findByDateAndValute(localDate, code);
+        ValuteEnt byDateAndValute = valuteRepo.findByDateAndValute(localDate, code.name());
         if (byDateAndValute == null){
             log.info("VALUTE DOES NOT EXISTS IN DATABASE");
 
@@ -126,6 +127,15 @@ public class ExchangeServiceImpl implements ExchangeService {
         }else {
             throw new NotFoundCustomException(VALUTE_CURS_NOT_FOUND,"No information was found for the selected date");
         }
+    }
+
+    @Override
+    public Set<ValuteType> getCurrencyByValute(ValuteEnum valute) {
+        Set<ValuteTypeEnt> valuteTypes = valuteTypeRepo.findByValute(valute.name());
+        if (valuteTypes.isEmpty())
+            throw new NotFoundCustomException(VALUTE_CURS_NOT_FOUND,"No information was found for the selected valute");
+        else
+            return valuteTypeMapper.toDto(valuteTypes);
     }
 
 

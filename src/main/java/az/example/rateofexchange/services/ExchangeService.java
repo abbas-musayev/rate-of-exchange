@@ -1,5 +1,6 @@
 package az.example.rateofexchange.services;
 
+import az.example.rateofexchange.enums.ValuteEnum;
 import az.example.rateofexchange.rest.dtos.response.ExchangeDTO;
 import az.example.rateofexchange.rest.dtos.request.ExchangeRequestDTO;
 import az.example.rateofexchange.rest.dtos.response.Valute;
@@ -13,9 +14,11 @@ import java.util.Set;
 public interface ExchangeService {
     ExchangeDTO saveCurrency(ExchangeRequestDTO dto) throws TransformerException, IOException, InterruptedException, JAXBException;
 
-    Valute getCurrencyByDateAndValute(String date, String valute);
+    Valute getCurrencyByDateAndValute(String date, ValuteEnum valute);
 
     Set<ValuteType> getCurrencyByDate(String date);
 
     void deleteCurrency(String date);
+
+    Set<ValuteType> getCurrencyByValute(ValuteEnum valute);
 }

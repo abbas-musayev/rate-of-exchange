@@ -42,8 +42,6 @@ public class ValuteEnt{
 
     @Column(name = "is_deleted")
     private Boolean isDeleted = Boolean.FALSE;
-    @Column(name = "is_active")
-    private Boolean isActive = Boolean.FALSE;
 
     @CreationTimestamp
     @Column(name = "created_date", updatable = false)
@@ -58,7 +56,6 @@ public class ValuteEnt{
 
     @PrePersist
     public void prePersist(){
-        setIsActive(true);
         setIsDeleted(false);
     }
 }
