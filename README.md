@@ -33,5 +33,16 @@ I added  -> annotationProcessor "org.mapstruct:mapstruct-processor:1.5.3.Final" 
 3. When using Mapstruct. I have a class that contains a Set<B> class inside A class and a Set<C> class inside it
 var when I map this class using Mapstruct it doesn't generate the codes for C class. You can look inside the az.example.rateofexchange.mapper.ValuteCursMapper interface to see the solution to this
 
+  ## This project template uses:
+
+* Java 11
+* [Gradle](https://gradle.org/) to build and, in dev-mode, run the application with hot reload
+* [Spring Web](https://spring.io/guides/gs/serving-web-content/) to serve HTTP requests
+* [Spring JPA](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/) for database access
+* [Spring Security](https://spring.io/guides/gs/securing-web/)
+* [Liquibase](https://www.liquibase.org/) for database migrations
+  
 ## The technology and libraries I use
 Java, Spring Boot, Spring Security, PosgreSQL, Mapstruct, Apache Http Client, Javax Validation, Json web token, Springfox-swagger2, Liquibase, Lombok
+  
+  
