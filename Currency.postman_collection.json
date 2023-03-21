@@ -1,0 +1,350 @@
+{
+	"info": {
+		"_postman_id": "5de35f33-9755-430a-8988-3f693e609ce3",
+		"name": "Currency",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12132909"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Login",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": {{username}},\r\n  \"password\": {{password}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_name}}/v1/login",
+							"host": [
+								"{{host_name}}"
+							],
+							"path": [
+								"v1",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"Test\",\r\n  \"password\": \"test\",\r\n  \"email\": \"test@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_name}}/v1/register",
+							"host": [
+								"{{host_name}}"
+							],
+							"path": [
+								"v1",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Currency",
+			"item": [
+				{
+					"name": "SaveCurrency",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"date\":\"19.03.2023\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/v1/currency",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"v1",
+								"currency"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteCurreny",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host_name}}/v1/currency?date=19.03.2023",
+							"host": [
+								"{{host_name}}"
+							],
+							"path": [
+								"v1",
+								"currency"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "19.03.2023"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find By Date",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host_name}}/v1/currency/by-date?date=19.03.2023",
+							"host": [
+								"{{host_name}}"
+							],
+							"path": [
+								"v1",
+								"currency",
+								"by-date"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "19.03.2023"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find By Date And Valute",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host_name}}/v1/currency/by-date-and-valute?date=18.03.2023&valute=USD",
+							"host": [
+								"{{host_name}}"
+							],
+							"path": [
+								"v1",
+								"currency",
+								"by-date-and-valute"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "18.03.2023"
+								},
+								{
+									"key": "valute",
+									"value": "USD"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find By Valute",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host_name}}/v1/currency/by-valute?valute=USD",
+							"host": [
+								"{{host_name}}"
+							],
+							"path": [
+								"v1",
+								"currency",
+								"by-valute"
+							],
+							"query": [
+								{
+									"key": "valute",
+									"value": "USD"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "https://www.cbar.az/currencies/16.03.2023.xml",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.cbar.az/currencies/19.03.2023.xml",
+					"protocol": "https",
+					"host": [
+						"www",
+						"cbar",
+						"az"
+					],
+					"path": [
+						"currencies",
+						"19.03.2023.xml"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

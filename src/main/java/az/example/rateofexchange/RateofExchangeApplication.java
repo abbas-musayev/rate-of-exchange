@@ -12,6 +12,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.List;
 import java.util.Set;
@@ -22,6 +23,7 @@ import static az.example.rateofexchange.enums.Role.USER;
 @SpringBootApplication
 @EntityScan("az.example.rateofexchange.domain")
 @RequiredArgsConstructor
+@EnableSwagger2
 @Slf4j
 public class RateofExchangeApplication implements CommandLineRunner {
 

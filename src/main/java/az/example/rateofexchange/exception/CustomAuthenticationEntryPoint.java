@@ -29,7 +29,6 @@ public class CustomAuthenticationEntryPoint extends GenericExceptionHandler impl
     @Override
     public void commence(HttpServletRequest httpServletRequest, HttpServletResponse response,
                          AuthenticationException ex) throws IOException, ServletException {
-        log.info("**** RESPONDING AuthenticationException ****");
         ObjectMapper mapper = new ObjectMapper();
         String message = NestedExceptionUtils.getMostSpecificCause(ex).getMessage();
 

@@ -1,7 +1,11 @@
 server:
   port: 8090
 
+
 security:
   secret:
     key: VGhpcyBpcyBteSBzZWNyZXQga2V5IGJhc2U2NCBiYXNlNjQgYmFzZTY0IGJhc2U2NA==
-
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher

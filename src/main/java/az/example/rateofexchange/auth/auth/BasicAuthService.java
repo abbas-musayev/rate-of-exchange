@@ -30,7 +30,6 @@ public class BasicAuthService implements AuthService {
     public Optional<Authentication> getAuthentication(HttpServletRequest request) {
 
         String authorization = request.getHeader("Authorization");
-        log.info("TOKEN {}", authorization);
         String basic = "";
 
         if (authorization != null && authorization.startsWith(BASIC)) {

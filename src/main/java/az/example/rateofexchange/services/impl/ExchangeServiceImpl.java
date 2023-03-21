@@ -129,7 +129,7 @@ public class ExchangeServiceImpl implements ExchangeService {
     }
 
 
-    private ValuteCurs callFeignCBARClient(String date ){
+    public ValuteCurs callFeignCBARClient(String date ){
         String url = "https://www.cbar.az/currencies/";
         HttpClient httpClient = HttpClient.newBuilder().build();
         try {
@@ -148,7 +148,7 @@ public class ExchangeServiceImpl implements ExchangeService {
     }
 
 
-    private LocalDate checkWeekendDate(LocalDate date){
+    public LocalDate checkWeekendDate(LocalDate date){
         DayOfWeek dayOfWeek = date.getDayOfWeek();
 
         // Əgər tarix həftə sonuna uyğun gəlirsə, Cümə günününə olan tarixi qaytarır
