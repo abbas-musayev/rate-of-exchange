@@ -14,6 +14,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Set;
 
@@ -36,13 +37,15 @@ public class RateofExchangeApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args){
-		auhtorityRepository.saveAll(Set.of(new Authority(null,USER),new Authority(null,ADMIN)));
+		auhtorityRepository.saveAll(Set.of(
+				new Authority(null,USER, false,true,Instant.now(),Instant.now()),
+				new Authority(null,ADMIN,false,true,Instant.now(),Instant.now())));
 
 		Authority a = new Authority();
         a.setRole(ADMIN);
         User user = User.builder()
 				.id(1L)
-                .username("Abbas")
+                .username("Admin")
                 .isAccountNonExpired(true)
                 .isCredentialsNonExpired(true)
                 .isEnabled(true)
