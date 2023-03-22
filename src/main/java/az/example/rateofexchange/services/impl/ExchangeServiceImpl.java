@@ -57,11 +57,9 @@ public class ExchangeServiceImpl implements ExchangeService {
             return new ExchangeDTO(map);
         }
         else {
+            log.info("ValuteCurs not exists A DATABASE");
             ValuteCurs valuteCurs = callFeignCBARClient(dto.getDate());
-            log.info("ValuteCurs not exists A DATABASE {}",valuteCurs);
-            ValuteCursEnt map = valuteCursMapper.toEntity(valuteCurs);
-            valuteCursRepo.save(map);
-            log.info("ValuteCursEnt SAVED TO DATABASE");
+            saveValuteCursIfNotExists(valuteCurs);
             return new ExchangeDTO(valuteCurs);
         }
     }
@@ -88,14 +86,13 @@ public class ExchangeServiceImpl implements ExchangeService {
                     }
                 }
             }
-            ValuteCursEnt valuteCursEnt = valuteCursMapper.toEntity(valuteCurs);
-            valuteCursRepo.save(valuteCursEnt);
-            log.info("VALUTE CURS SAVED IN DATABASE");
+
+            saveValuteCursIfNotExists(valuteCurs);
+            return response;
         }else {
             log.info("VALUTE EXISTS IN DATABASE");
             return valuteMapper.toDto(byDateAndValute);
         }
-        return response;
     }
 
     @Override
@@ -107,9 +104,7 @@ public class ExchangeServiceImpl implements ExchangeService {
         Set<ValuteTypeEnt> valuteTypeEnts = valuteTypeRepo.findByDate(localDate);
         if (valuteTypeEnts.isEmpty()){
             ValuteCurs valuteCurs = callFeignCBARClient(date);
-            ValuteCursEnt valuteCursEnt = valuteCursMapper.toEntity(valuteCurs);
-            valuteCursRepo.save(valuteCursEnt);
-            log.info("VALUTE CURS SAVED IN DATABASE");
+            saveValuteCursIfNotExists(valuteCurs);
             return valuteCurs.getValuteType();
         }else {
             return valuteTypeMapper.toDto(valuteTypeEnts);
@@ -169,6 +164,21 @@ public class ExchangeServiceImpl implements ExchangeService {
         }
         else {
             return date;
+        }
+    }
+
+    public LocalDate convertStringToLocalDate(String date, String format){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+        return LocalDate.parse(date, formatter);
+    }
+
+    public void saveValuteCursIfNotExists(ValuteCurs valuteCurs){
+        Set<ValuteTypeEnt> byDate =
+                valuteTypeRepo.findByDate(convertStringToLocalDate(valuteCurs.getDate(), "dd.MM.yyyy"));
+        if (byDate.isEmpty()){
+             ValuteCursEnt valuteCursEnt = valuteCursMapper.toEntity(valuteCurs);
+            valuteCursRepo.save(valuteCursEnt);
+            log.info("VALUTE CURS SAVED IN DATABASE");
         }
     }
 }

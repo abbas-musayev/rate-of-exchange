@@ -13,11 +13,13 @@ import java.util.Optional;
 @Repository
 public interface ValuteCursRepo extends JpaRepository<ValuteCursEnt, Long> {
 
-    @Query("select curs from ValuteCursEnt curs "
-            +
+    @Query("select curs from ValuteCursEnt curs " +
             " left join fetch curs.valuteTypes types " +
-            " left join fetch types.valutes " +
-            " where curs.date= :date"
+            " left join fetch types.valutes val " +
+            " where curs.date= :date" +
+            " and curs.isDeleted= false " +
+            " and types.isDeleted= false" +
+            " and val.isDeleted= false"
     )
     ValuteCursEnt findByDate(@Param("date") LocalDate date);
 }
