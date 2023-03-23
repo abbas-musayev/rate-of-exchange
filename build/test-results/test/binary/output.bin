@@ -1,0 +1,2 @@
+}10:44:01.733 [Test worker] INFO az.example.rateofexchange.services.impl.ExchangeServiceImpl - VALUTE CURS SAVED IN DATABASE
+v10:44:01.746 [Test worker] INFO az.example.rateofexchange.services.impl.ExchangeServiceImpl - DATA FOUND IN DATABASE
